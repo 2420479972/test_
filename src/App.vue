@@ -1,17 +1,23 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
+<script lang="ts" setup>
+
+
+const _click = () => {
+  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.nativeHandler) {
+    window.webkit.messageHandlers.nativeHandler.postMessage("loginSuccess")
+  } //登陆成功后调用 就是在获取到token之后调用
+}
+
+const _2click = ()=>{
+  if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.nativeHandler) {
+    window.webkit.messageHandlers.nativeHandler.postMessage("loginoutSuccess")
+  }//退出登陆后调用
+}
+
 </script>
 
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <button @click="_click">loginSuccess</button>
+  <button @click="_2click">loginoutSuccess</button>
 </template>
 
 <style scoped>
@@ -21,9 +27,11 @@ import HelloWorld from './components/HelloWorld.vue'
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
 }
